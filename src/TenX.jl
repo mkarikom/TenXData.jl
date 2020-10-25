@@ -16,11 +16,13 @@ function loadData(countFn::String,geneFn::String,barcodeFn::String)
     if extn == "gz" || extn == "gzip"
         fh = GZip.open(countFn)
         M = TenX.mmread(fh)
-        G = map(r->r[1],CSV.File(GZip.open(geneFn)))
-        B = map(r->r[1],CSV.File(GZip.open(barcodeFn)))
-
-        df = DataFrame(M)
     else
+        M = mmread(countFn)
     end
+    G = map(r->r[1],CSV.File(GZip.open(geneFn),header=0))
+    B = map(r->r[1],CSV.File(GZip.open(barcodeFn),header=0))
+    df = rename!(DataFrame(M),B)
+    insertcols!(df,1,"gene"=>G)
+    df
 end
 end
