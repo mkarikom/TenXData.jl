@@ -10,9 +10,9 @@ matrix elements are not parsed.
 If retcoord is true (default: false), the rows, column and value vectors
 are returned, if it is a sparse matrix, along with the header information.
 """
-function mmread(mmfile::GZipStream, infoonly::Bool=false, retcoord::Bool=false)
+function mmread(mmstream::TranscodingStream, infoonly::Bool=false, retcoord::Bool=false)
     # Read first line
-    firstline = chomp(readline(mmfile))
+    firstline = chomp(readline(mmstream))
     tokens = split(firstline)
     if length(tokens) != 5
         throw(ParseError(string("Not enough words on first line: ", firstline)))
@@ -38,9 +38,9 @@ function mmread(mmfile::GZipStream, infoonly::Bool=false, retcoord::Bool=false)
                throw(ParseError("Unknown matrix symmetry: $symm (only general, symmetric, skew-symmetric and hermitian are supported)"))
 
     # Skip all comments and empty lines
-    ll   = readline(mmfile)
+    ll   = readline(mmstream)
     while length(chomp(ll))==0 || (length(ll) > 0 && ll[1] == '%')
-        ll = readline(mmfile)
+        ll = readline(mmstream)
     end
     # Read matrix dimensions (and number of entries) from first non-comment line
     dd = map(_parseint, split(ll))
@@ -53,14 +53,14 @@ function mmread(mmfile::GZipStream, infoonly::Bool=false, retcoord::Bool=false)
     infoonly && return (rows, cols, entries, rep, field, symm)
 
     rep == "coordinate" ||
-        return symlabel(reshape([parse(Float64, readline(mmfile)) for i in 1:entries],
+        return symlabel(reshape([parse(Float64, readline(mmstream)) for i in 1:entries],
                                 (rows,cols)))
 
     rr = Vector{Int}(undef, entries)
     cc = Vector{Int}(undef, entries)
     xx = Vector{eltype}(undef, entries)
     for i in 1:entries
-        line = readline(mmfile)
+        line = readline(mmstream)
         splits = find_splits(line, eltype == ComplexF64 ? 3 : (eltype == Bool ? 1 : 2))
         rr[i] = _parseint(line[1:splits[1]])
         cc[i] = _parseint(eltype == Bool
