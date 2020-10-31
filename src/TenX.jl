@@ -3,8 +3,8 @@ module TenX
 using CodecZlib,TranscodingStreams
 using DataFrames,CSV
 using SparseArrays # needed for mmread
-using Compat.SparseArrays # needed for mmread
-using Compat.LinearAlgebra # needed for mmread
+using SparseArrays # needed for mmread
+using LinearAlgebra # needed for mmread
 using MatrixMarket: _parseint,find_splits,skewsymmetric!,symmetric!,hermitian! # needed for mmread
 
 import MatrixMarket.mmread
