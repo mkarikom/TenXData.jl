@@ -1,8 +1,8 @@
-name = "TenX"
+name = "TenXData"
 uuid = "068dec19-929c-41c0-935f-50650e5a4e0c"
 authors = ["Matt Karikomi <mattkarikomi@gmail.com> and contributors"]
-version = "1.0.0"
-repo = "https://github.com/mkarikom/TenX.jl.git"
+version = "1.0.1"
+repo = "https://github.com/mkarikom/TenXData.jl.git"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
