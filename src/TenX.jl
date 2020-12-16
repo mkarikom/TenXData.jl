@@ -1,4 +1,4 @@
-module TenX
+module TenXData
 
 using CodecZlib,TranscodingStreams
 using DataFrames,CSV
