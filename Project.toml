@@ -1,8 +1,8 @@
 name = "TenXData"
 uuid = "068dec19-929c-41c0-935f-50650e5a4e0c"
 authors = ["Matt Karikomi <mattkarikomi@gmail.com> and contributors"]
-version = "1.0.1"
 repo = "https://github.com/mkarikom/TenXData.jl.git"
+version = "1.0.1"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
@@ -15,6 +15,7 @@ SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 TranscodingStreams = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
 
 [compat]
+CSV = "0.8"
 julia = "1.5"
 
 [extras]
