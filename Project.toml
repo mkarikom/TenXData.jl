@@ -15,6 +15,7 @@ SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 TranscodingStreams = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
 
 [compat]
+MatrixMarket = "0.3"
 CSV = "0.8"
 CodecZlib = "0.7"
 TranscodingStreams = "0.9"
